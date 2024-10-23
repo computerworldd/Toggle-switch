@@ -1,0 +1,159 @@
+<!doctype html>
+<head>
+    <title></title>
+    <style>
+        *,
+*:after,
+*:before {
+  box-sizing: border-box;
+}
+
+body {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  font-family: "SF Pro Text", "SF Pro Icons", "AOS Icons", "Helvetica Neue",
+    Helvetica, Arial, sans-serif, system-ui;
+  background: hsl(0 0% 4%);
+  color: hsl(0 0% 100%);
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 100px;
+  background: radial-gradient(circle at 0 50%, hsl(215 99% 67%), transparent)
+      border-box,
+    hsl(239 100% 75%);
+  border: 4px solid transparent;
+  padding-left: 0.5rem;
+  position: relative;
+  color: hsl(0 0% 4%);
+  &::after {
+    content: "";
+    position: absolute;
+    inset: -4px;
+    border-radius: 100px;
+    pointer-events: none;
+    box-shadow: 0 1px inset hsl(0 0% 100% / 0.5),
+      0 -1px inset hsl(0 0% 0% / 0.5);
+  }
+
+  & button {
+    width: 40px;
+    aspect-ratio: 1;
+    padding: 0;
+    display: grid;
+    place-items: center;
+    background: transparent;
+    border: 0;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.25s;
+    &:hover {
+      background: hsl(215, 99%, 58%);
+    }
+
+    & svg {
+      width: 32px;
+      fill: currentColor;
+    }
+  }
+
+  & .tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    cursor: pointer;
+
+    & .tabs__indicator {
+      position: absolute;
+      width: 50%;
+      height: 100%;
+      background: black;
+      border-radius: 100px;
+      overflow: hidden;
+      transition: translate 0.25s;
+      pointer-events: none;
+      & .tabs__track {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        width: 200%;
+        color: white;
+        transition: translate 0.25s;
+      }
+    }
+  }
+
+  & .divider {
+    width: 2px;
+    height: 24px;
+    background: currentColor;
+    margin-right: 0.5rem;
+  }
+
+  & input:focus-visible ~ .tabs__indicator {
+    outline: 2px solid hsl(239 100% 95%);
+    outline-offset: 2px;
+  }
+
+  & label {
+    font-size: 1.35rem;
+    font-weight: 500;
+    text-align: center;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: background 0.25s;
+    border-radius: 100px;
+    &:hover {
+      background: hsl(239 100% 70% / 0.5);
+    }
+  }
+
+  .service-switch {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+    &:nth-of-type(2):checked {
+      & ~ .tabs__indicator {
+        translate: 100% 0;
+      }
+
+      & ~ .tabs__indicator .tabs__track {
+        translate: -50% 0;
+      }
+    }
+  }
+}
+
+    </style>
+</head>
+<body>
+    <div class="controls">
+        <button inert>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" focusable="false">
+            <path d="M12 16C13.1 16 14 16.9 14 18S13.1 20 12 20 10 19.1 10 18 10.9 16 12 16M12 10C13.1 10 14 10.9 14 12S13.1 14 12 14 10 13.1 10 12 10.9 10 12 10M12 4C13.1 4 14 4.9 14 6S13.1 8 12 8 10 7.1 10 6 10.9 4 12 4M6 16C7.1 16 8 16.9 8 18S7.1 20 6 20 4 19.1 4 18 4.9 16 6 16M6 10C7.1 10 8 10.9 8 12S7.1 14 6 14 4 13.1 4 12 4.9 10 6 10M6 4C7.1 4 8 4.9 8 6S7.1 8 6 8 4 7.1 4 6 4.9 4 6 4M18 16C19.1 16 20 16.9 20 18S19.1 20 18 20 16 19.1 16 18 16.9 16 18 16M18 10C19.1 10 20 10.9 20 12S19.1 14 18 14 16 13.1 16 12 16.9 10 18 10M18 4C19.1 4 20 4.9 20 6S19.1 8 18 8 16 7.1 16 6 16.9 4 18 4Z" />
+          </svg>
+        </button>
+        <div class="divider"></div>
+        <div class="tabs">
+          <input class="service-switch" id="slider" type="radio" name="tabs" value="slider" />
+          <label for="slider">Slider</label>
+          <input class="service-switch" id="grid" type="radio" name="tabs" value="grid" />
+          <label for="grid">Grid</label>
+          <div class="tabs__indicator" aria-hidden="true">
+            <div class="tabs__track">
+              <label for="slider">Slider</label>
+              <label for="grid">Grid</label>
+            </div>
+          </div>
+        </div>
+      </div>
+</body>
